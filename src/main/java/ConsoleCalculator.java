@@ -2,30 +2,30 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class ConsoleCalculator {
-    private Scanner scanner = new Scanner(System.in);
 
     public static String ExpressionToRPN(String expression) {
         StringBuilder result = new StringBuilder();
-        Stack<Character> stack = new Stack<Character>();
+        Stack<Character> stack = new Stack<>();
 
-        int priority;
         for (int i = 0; i < expression.length(); i++) {
-            priority = getPriority(expression.charAt(i));
-            if (priority == 0) result.append(expression.charAt(i));
-            if (priority == 1) stack.push(expression.charAt(i));
+            char token = expression.charAt(i);
+            int priority = getPriority(token);
+
+            if (priority == 0) result.append(token);
+            if (priority == 1) stack.push(token);
 
             if (priority > 1) {
-                result.append(" ");
+                result.append(' ');
 
                 while (!stack.empty()) {
                     if (getPriority(stack.peek()) >= priority) result.append(stack.pop());
                     else break;
                 }
-                stack.push(expression.charAt(i));
+                stack.push(token);
             }
 
             if (priority == -1) {
-                result.append(" ");
+                result.append(' ');
 
                 while (getPriority(stack.peek()) != 1) {
                     result.append(stack.pop());
@@ -42,10 +42,12 @@ public class ConsoleCalculator {
 
     public static int RPNToAnswer(String rpn) {
         StringBuilder sb = new StringBuilder();
-        Stack<Integer> stack = new Stack<Integer>();
+        Stack<Integer> stack = new Stack<>();
 
         for (int i = 0; i < rpn.length(); i++) {
+
             if (rpn.charAt(i) == ' ') continue;
+
             if (getPriority(rpn.charAt(i)) == 0) {
                 while (rpn.charAt(i) != ' ' && getPriority(rpn.charAt(i)) == 0) {
                     sb.append(rpn.charAt(i++));
@@ -54,6 +56,7 @@ public class ConsoleCalculator {
                 stack.push(Integer.parseInt(sb.toString()));
                 sb.delete(0, sb.length());
             }
+
             if (getPriority(rpn.charAt(i)) > 1) {
                 int a = stack.pop(), b = stack.pop();
 
@@ -76,6 +79,10 @@ public class ConsoleCalculator {
     }
 
     public static void main(String[] args) {
-        System.out.println(RPNToAnswer(ExpressionToRPN("(2 + 2) * 2")));
+
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println(RPNToAnswer(ExpressionToRPN(scanner.nextLine())));
+        }
+
     }
 }
