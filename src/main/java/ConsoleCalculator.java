@@ -17,16 +17,18 @@ public class ConsoleCalculator {
 
         try (Scanner scanner = new Scanner(System.in)) {
             String expression = scanner.nextLine();
+            ExpressionToRpn expressionToRpn = new ExpressionToRpn();
+            RpnToResult rpnToResult = new RpnToResult();
 
             if (Character.isDigit(expression.toCharArray()[0]) || Character.isDigit(expression.toCharArray()[1])) {
-                String rpn = new ExpressionToRpn().apply(expression);
-                int result = new RpnToResult().apply(rpn);
+                String rpn = expressionToRpn.apply(expression);
+                int result = rpnToResult.apply(rpn);
                 System.out.println(result);
 
             } else {
                 String convertedExpression = RomanNumeral.convertExpressionFromRomanToArabicBeforeCalculation(expression);
-                String rpn = new ExpressionToRpn().apply(convertedExpression);
-                int result = new RpnToResult().apply(rpn);
+                String rpn = expressionToRpn.apply(convertedExpression);
+                int result = rpnToResult.apply(rpn);
                 String romanResult = new ArabicToRoman().apply(result);
                 System.out.println(romanResult);
             }
