@@ -86,18 +86,4 @@ class ConsoleCalculator {
         else if (token == ')') return -1;
         return 0;
     }
-
-    String convertExpressionFromRomanianToArabicBeforeCalculation(String expression) {
-        String[] expressionStringArray = expression.split("[+\\-*/()]");
-
-        for (int i = 0; i < expressionStringArray.length; i++) {
-            String romanNumber = expressionStringArray[i].trim();
-            int arabicNumber = RomanNumeral.romanToArabic(romanNumber);
-            if (arabicNumber > 10) throw new RuntimeException("Число не должно превышать 10");
-            if (!romanNumber.isEmpty()) expressionStringArray[i] = String.valueOf(arabicNumber);
-
-            expression = expression.replaceFirst(romanNumber, expressionStringArray[i]);
-        }
-        return expression;
-    }
 }

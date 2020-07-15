@@ -18,7 +18,7 @@ public class Main {
                 System.out.println(result);
 
             } else {
-                String convertedExpression = calculator.convertExpressionFromRomanianToArabicBeforeCalculation(expression);
+                String convertedExpression = RomanNumeral.convertExpressionFromRomanianToArabicBeforeCalculation(expression);
                 String rpn = calculator.expressionToRPN(convertedExpression);
                 int result = calculator.rpnToResult(rpn);
                 String romanResult = RomanNumeral.arabicToRoman(result);
