@@ -1,8 +1,8 @@
 import java.util.Stack;
 
-class ConsoleCalculator {
+public class ConsoleCalculator {
 
-    String expressionToRPN(String expression) {
+    public String expressionToRPN(String expression) {
         StringBuilder result = new StringBuilder();
         Stack<Character> stack = new Stack<>();
 
@@ -42,7 +42,7 @@ class ConsoleCalculator {
         return result.toString();
     }
 
-    int rpnToResult(String rpn) {
+    public int rpnToResult(String rpn) {
         StringBuilder sb = new StringBuilder();
         Stack<Integer> stack = new Stack<>();
 
