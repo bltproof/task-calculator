@@ -2,11 +2,6 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class ConsoleCalculator {
-    private String expression;
-
-    public ConsoleCalculator(String expression) {
-        this.expression = expression;
-    }
 
     private static String ExpressionToRPN(String expression) {
         StringBuilder result = new StringBuilder();
@@ -100,7 +95,15 @@ public class ConsoleCalculator {
     }
 
     private static String convert(Scanner scanner) {
+        String expression = scanner.nextLine();
+        String[] array = expression.split("[+\\-*/()]");
 
+        for (int i = 0; i < array.length; i++) {
+            String romanLetter = array[i].trim();
+            if (!romanLetter.isEmpty()) array[i] = String.valueOf(RomanNumeral.romanToArabic(romanLetter));
+            expression = expression.replace(romanLetter, array[i]);
+        }
+        return expression;
     }
 
     public static void main(String[] args) {
@@ -109,16 +112,9 @@ public class ConsoleCalculator {
         System.out.println("Введите выражение одной строкой");
 
         try (Scanner scanner = new Scanner(System.in)) {
-            String str = scanner.nextLine();
-            String[] array = str.split("[+\\-*/()]");
+            String expression = convert(scanner);
 
-            for (int i = 0; i < array.length; i++) {
-                String romanLetter = array[i].trim();
-                if (!romanLetter.isEmpty()) array[i] = String.valueOf(RomanNumeral.romanToArabic(romanLetter));
-                str = str.replace(romanLetter, array[i]);
-            }
-
-            System.out.println(str);
+            System.out.println(RPNToAnswer(ExpressionToRPN(expression)));
 
         } catch (Exception e) {
             e.printStackTrace();
