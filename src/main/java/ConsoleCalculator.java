@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ConsoleCalculator {
@@ -38,14 +39,6 @@ public class ConsoleCalculator {
         }
         while (!stack.empty()) {
             result.append(stack.pop());
-        }
-        //(?!10$)([0-9]{2})
-        //[2-9[1-9]]{2,}
-        String str = "2*3+(44 / 2)";
-        Pattern pattern = Pattern.compile("[2-9[1-9]]{2,}");
-
-        if (pattern.matcher(str).matches()) {
-            throw new RuntimeException("Ошибка! Цифры только от 1 до 10!");
         }
 
         return result.toString();
@@ -94,8 +87,7 @@ public class ConsoleCalculator {
         return 0;
     }
 
-    private static String convert(Scanner scanner) {
-        String expression = scanner.nextLine();
+    private static String convert(String expression) {
         String[] array = expression.split("[+\\-*/()]");
 
         for (int i = 0; i < array.length; i++) {
@@ -112,9 +104,13 @@ public class ConsoleCalculator {
         System.out.println("Введите выражение одной строкой");
 
         try (Scanner scanner = new Scanner(System.in)) {
-            String expression = convert(scanner);
+            String expression = scanner.nextLine();
 
-            System.out.println(RPNToAnswer(ExpressionToRPN(expression)));
+            if (Character.isDigit(expression.toCharArray()[0])) {
+                System.out.println(RPNToAnswer(ExpressionToRPN(expression)));
+            } else {
+                System.out.println(RomanNumeral.arabicToRoman(RPNToAnswer(ExpressionToRPN(convert(expression)))));
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
