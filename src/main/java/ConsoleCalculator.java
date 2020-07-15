@@ -1,6 +1,5 @@
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Scanner;
+import java.util.Stack;
 
 public class ConsoleCalculator {
 
@@ -88,12 +87,12 @@ public class ConsoleCalculator {
     }
 
     private static String convert(String expression) {
-        String[] array = expression.split("[+\\-*/()]");
+        String[] stArray = expression.split("[+\\-*/()]");
 
-        for (int i = 0; i < array.length; i++) {
-            String romanLetter = array[i].trim();
-            if (!romanLetter.isEmpty()) array[i] = String.valueOf(RomanNumeral.romanToArabic(romanLetter));
-            expression = expression.replace(romanLetter, array[i]);
+        for (int i = 0; i < stArray.length; i++) {
+            String romanLetter = stArray[i].trim();
+            if (!romanLetter.isEmpty()) stArray[i] = String.valueOf(RomanNumeral.romanToArabic(romanLetter));
+            expression = expression.replaceFirst(romanLetter, stArray[i]);
         }
         return expression;
     }
@@ -106,7 +105,7 @@ public class ConsoleCalculator {
         try (Scanner scanner = new Scanner(System.in)) {
             String expression = scanner.nextLine();
 
-            if (Character.isDigit(expression.toCharArray()[0])) {
+            if (Character.isDigit(expression.toCharArray()[0]) || Character.isDigit(expression.toCharArray()[1])) {
                 System.out.println(RPNToAnswer(ExpressionToRPN(expression)));
             } else {
                 System.out.println(RomanNumeral.arabicToRoman(RPNToAnswer(ExpressionToRPN(convert(expression)))));
