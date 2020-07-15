@@ -72,7 +72,7 @@ public enum RomanNumeral {
         return sb.toString();
     }
 
-    public static String convertExpressionFromRomanianToArabicBeforeCalculation(String expression) {
+    public static String convertExpressionFromRomanToArabicBeforeCalculation(String expression) {
         String[] expressionStringArray = expression.split("[+\\-*/()]");
 
         for (int i = 0; i < expressionStringArray.length; i++) {

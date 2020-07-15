@@ -14,11 +14,11 @@ public class Main {
 
             if (Character.isDigit(expression.toCharArray()[0]) || Character.isDigit(expression.toCharArray()[1])) {
                 String rpn = calculator.expressionToRPN(expression);
-                int result = calculator.rpnToResult(rpn);
-                System.out.println(result);
+                int arabicResult = calculator.rpnToResult(rpn);
+                System.out.println(arabicResult);
 
             } else {
-                String convertedExpression = RomanNumeral.convertExpressionFromRomanianToArabicBeforeCalculation(expression);
+                String convertedExpression = RomanNumeral.convertExpressionFromRomanToArabicBeforeCalculation(expression);
                 String rpn = calculator.expressionToRPN(convertedExpression);
                 int result = calculator.rpnToResult(rpn);
                 String romanResult = RomanNumeral.arabicToRoman(result);
