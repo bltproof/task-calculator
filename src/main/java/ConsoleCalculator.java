@@ -1,9 +1,8 @@
-import java.util.Scanner;
 import java.util.Stack;
 
-public class ConsoleCalculator {
+class ConsoleCalculator {
 
-    private static String ExpressionToRPN(String expression) {
+    String expressionToRPN(String expression) {
         StringBuilder result = new StringBuilder();
         Stack<Character> stack = new Stack<>();
 
@@ -43,7 +42,7 @@ public class ConsoleCalculator {
         return result.toString();
     }
 
-    private static int RPNToAnswer(String rpn) {
+    int rpnToResult(String rpn) {
         StringBuilder sb = new StringBuilder();
         Stack<Integer> stack = new Stack<>();
 
@@ -80,7 +79,7 @@ public class ConsoleCalculator {
         return stack.pop();
     }
 
-    private static int getPriority(char token) {
+    private int getPriority(char token) {
         if (token == '*' || token == '/') return 3;
         else if (token == '+' || token == '-') return 2;
         else if (token == '(') return 1;
@@ -88,7 +87,7 @@ public class ConsoleCalculator {
         return 0;
     }
 
-    private static String convert(String expression) {
+    String convertExpressionFromRomanianToArabicBeforeCalculation(String expression) {
         String[] expressionStringArray = expression.split("[+\\-*/()]");
 
         for (int i = 0; i < expressionStringArray.length; i++) {
@@ -100,24 +99,5 @@ public class ConsoleCalculator {
             expression = expression.replaceFirst(romanNumber, expressionStringArray[i]);
         }
         return expression;
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println("Калькулятор умеет работать с римскими или арабскими цифрами");
-        System.out.println("Введите выражение одной строкой");
-
-        try (Scanner scanner = new Scanner(System.in)) {
-            String expression = scanner.nextLine();
-
-            if (Character.isDigit(expression.toCharArray()[0]) || Character.isDigit(expression.toCharArray()[1])) {
-                System.out.println(RPNToAnswer(ExpressionToRPN(expression)));
-            } else {
-                System.out.println(RomanNumeral.arabicToRoman(RPNToAnswer(ExpressionToRPN(convert(expression)))));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
