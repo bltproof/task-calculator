@@ -56,7 +56,9 @@ public class ConsoleCalculator {
                     sb.append(rpn.charAt(i++));
                     if (i == rpn.length()) break;
                 }
-                stack.push(Integer.parseInt(sb.toString()));
+                int number = Integer.parseInt(sb.toString());
+                if (number > 10) throw new RuntimeException("Число не должно превышать 10");
+                stack.push(number);
                 sb.delete(0, sb.length());
             }
 
@@ -87,12 +89,15 @@ public class ConsoleCalculator {
     }
 
     private static String convert(String expression) {
-        String[] stArray = expression.split("[+\\-*/()]");
+        String[] expressionStringArray = expression.split("[+\\-*/()]");
 
-        for (int i = 0; i < stArray.length; i++) {
-            String romanLetter = stArray[i].trim();
-            if (!romanLetter.isEmpty()) stArray[i] = String.valueOf(RomanNumeral.romanToArabic(romanLetter));
-            expression = expression.replaceFirst(romanLetter, stArray[i]);
+        for (int i = 0; i < expressionStringArray.length; i++) {
+            String romanNumber = expressionStringArray[i].trim();
+            int arabicNumber = RomanNumeral.romanToArabic(romanNumber);
+            if (arabicNumber > 10) throw new RuntimeException("Число не должно превышать 10");
+            if (!romanNumber.isEmpty()) expressionStringArray[i] = String.valueOf(arabicNumber);
+
+            expression = expression.replaceFirst(romanNumber, expressionStringArray[i]);
         }
         return expression;
     }
