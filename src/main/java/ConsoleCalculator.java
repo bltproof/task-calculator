@@ -11,11 +11,8 @@ public class ConsoleCalculator {
     }
 
     public static void main(String[] args) {
-
-        System.out.println("Калькулятор умеет работать с римскими или арабскими цифрами");
-        System.out.println("Введите выражение одной строкой");
-
         try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Введите выражение одной строкой: ");
             String expression = scanner.nextLine();
             ExpressionToRpn expressionToRpn = new ExpressionToRpn();
             RpnToResult rpnToResult = new RpnToResult();
