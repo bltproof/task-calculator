@@ -23,18 +23,4 @@ public enum RomanNumeral {
                 .sorted(Comparator.comparing((RomanNumeral e) -> e.value).reversed())
                 .collect(Collectors.toList());
     }
-
-    public static String convertExpressionFromRomanToArabicBeforeCalculation(String expression) {
-        String[] expressionStringArray = expression.split("[+\\-*/()]");
-
-        for (int i = 0; i < expressionStringArray.length; i++) {
-            String romanNumber = expressionStringArray[i].trim();
-            int arabicNumber = new RomanToArabic().apply(romanNumber);
-            if (arabicNumber > 10) throw new RuntimeException("Число не должно превышать 10");
-            if (!romanNumber.isEmpty()) expressionStringArray[i] = String.valueOf(arabicNumber);
-
-            expression = expression.replaceFirst(romanNumber, expressionStringArray[i]);
-        }
-        return expression;
-    }
 }
