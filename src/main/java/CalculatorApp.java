@@ -3,7 +3,9 @@ import java.util.Scanner;
 public class CalculatorApp {
 
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
 
             System.out.println("Введите выражение одной строкой: ");
 
