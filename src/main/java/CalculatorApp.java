@@ -6,7 +6,6 @@ public class CalculatorApp {
         Scanner scanner = new Scanner(System.in);
 
         try {
-
             System.out.println("Введите выражение одной строкой: ");
 
             String expression = scanner.nextLine();
