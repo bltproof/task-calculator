@@ -23,7 +23,7 @@ public class CalculatorApp {
                 String preparedExpression = conversion.prepare(expression);
                 String rpnString = notation.expressionToRpn(preparedExpression);
                 int result = notation.rpnToResult(rpnString);
-                String romanResult = conversion.arabicToRoman(result);
+                String romanResult = conversion.toRoman(result);
                 System.out.println(romanResult);
             }
 
