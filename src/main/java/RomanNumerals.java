@@ -2,11 +2,6 @@ public class RomanNumerals {
     private static final String[] ROMAN_NUMBERS = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
     private static final int[] ARABIC_NUMBERS = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 
-    public static void main(String[] args) {
-        System.out.println(toRoman(2018));
-        System.out.println(fromRoman("MMX"));
-    }
-
     public static String toRoman(int n) {
         int remainingValue = n;
         StringBuilder result = new StringBuilder();
@@ -17,7 +12,6 @@ public class RomanNumerals {
                 result.append(ROMAN_NUMBERS[i]);
             }
         }
-
         return result.toString();
     }
 
